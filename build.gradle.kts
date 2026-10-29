@@ -41,18 +41,21 @@ ext["spring-framework.version"] = "6.2.19-0.cgr.1"
 dependencies {
     // Spring Boot starters — Boot version comes from the BOM;
     // transitive Framework resolution flows through the ext["spring-framework.version"]
-    // override above.
+    // override above. Spring Security version comes from the BOM default (6.5.4
+    // for Boot 3.5.14). You can override Security the same way we overrode
+    // Framework — see the commented block below for the pattern.
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-    // Spring Security 6.5.11 explicit pins. Boot 3.5.14's BOM pins Security
-    // to 6.5.4, so these overrides are the only way to reach a newer Security
-    // patch while keeping the rest of the Boot BOM.
-    implementation("org.springframework.security:spring-security-core:6.5.11-0.cgr.1")
-    implementation("org.springframework.security:spring-security-web:6.5.11-0.cgr.1")
-    implementation("org.springframework.security:spring-security-config:6.5.11-0.cgr.1")
-    implementation("org.springframework.security:spring-security-oauth2-resource-server:6.5.11-0.cgr.1")
+    // Example: pinning Spring Security to a specific +cgr-remediated patch.
+    // Uncomment if your Chainguard org has coverage for the pinned version
+    // and you need to override Boot's BOM default:
+    //
+    //   implementation("org.springframework.security:spring-security-core:6.5.11-0.cgr.1")
+    //   implementation("org.springframework.security:spring-security-web:6.5.11-0.cgr.1")
+    //   implementation("org.springframework.security:spring-security-config:6.5.11-0.cgr.1")
+    //   implementation("org.springframework.security:spring-security-oauth2-resource-server:6.5.11-0.cgr.1")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
