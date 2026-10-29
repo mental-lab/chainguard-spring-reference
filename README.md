@@ -410,9 +410,8 @@ Chainguard without storing long-lived credentials.
 `chainctl iam organizations list`:
 
 ```bash
-chainctl iam identity create \
+chainctl iam identities create "spring-reference-ci" \
   --parent <org-uidp> \
-  --name "spring-reference-ci" \
   --identity-issuer https://token.actions.githubusercontent.com \
   --subject "repo:<your-github-user>/chainguard-spring-reference:ref:refs/heads/main" \
   --role viewer
