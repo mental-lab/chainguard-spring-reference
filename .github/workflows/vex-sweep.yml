@@ -1,0 +1,111 @@
+name: vex-sweep
+
+# Nightly sweep: build the project, cross-reference the Chainguard VEX feed
+# via suture, and open a PR bumping any pinned Spring artifacts to a newer
+# +cgr.N revision that remediates a currently-open CVE.
+#
+# Complements the per-PR advice workflow — this one proactively surfaces
+# fixes we haven't adopted yet; the per-PR one gates merges on them.
+
+on:
+  schedule:
+    - cron: "0 6 * * *"     # 06:00 UTC daily
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  # Required so GitHub issues an OIDC token this workflow can exchange
+  # for a short-lived Chainguard identity assertion.
+  id-token: write
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up chainctl via OIDC
+        uses: chainguard-dev/setup-chainctl@main
+        with:
+          identity: ${{ vars.CHAINGUARD_IDENTITY }}
+
+      - name: Mint short-lived pull token for libraries.cgr.dev
+        run: |
+          eval "$(chainctl auth pull-token \
+                    --repository=java \
+                    --parent=${{ vars.CHAINGUARD_PARENT }} \
+                    --ttl=1h \
+                    --output env)"
+          echo "CHAINGUARD_JAVA_IDENTITY_ID=$CHAINGUARD_JAVA_IDENTITY_ID" >> "$GITHUB_ENV"
+          echo "CHAINGUARD_JAVA_TOKEN=$CHAINGUARD_JAVA_TOKEN" >> "$GITHUB_ENV"
+          echo "::add-mask::$CHAINGUARD_JAVA_TOKEN"
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build + SBOM (current pins)
+        run: ./gradlew --no-daemon build cyclonedxBom
+
+      - name: VEX advice (no gate — we want the report regardless)
+        uses: ./.github/actions/vex-advice
+        with:
+          gate: "false"
+
+      - name: Apply suggested bumps to build.gradle.kts
+        id: bump
+        run: |
+          set -euo pipefail
+          # Extract (pkg, installed, fix_purl) tuples where suture recommends
+          # a backport that hasn't been applied yet. JSON schema is suture's
+          # structured contract — do not parse the markdown report.
+          bumps=$(jq -r '
+            .remediation_recommendations[]
+            | select(.action == "backport" and (.fix_applied | not))
+            | "\(.pkg)|\(.installed)|\(.fix_purl)|\(.id)"
+          ' vex-report.md.json)
+
+          if [ -z "$bumps" ]; then
+            echo "no_bumps=true" >> "$GITHUB_OUTPUT"
+            echo "No unapplied backports in advice JSON."
+            exit 0
+          fi
+
+          while IFS='|' read -r pkg installed fix_purl cve; do
+            # pkg is "group:artifact"; artifact scopes the rewrite so unrelated
+            # libraries holding the same version string aren't touched.
+            artifact="${pkg##*:}"
+            # fix_purl is e.g. pkg:maven/org.springframework/spring-webmvc@6.2.19-0.cgr.2
+            new_version="${fix_purl##*@}"
+            esc_installed=$(printf '%s' "$installed" | sed 's/[.[\*^$()+?{|/]/\\&/g')
+            sed -i -E "/$artifact/ s/$esc_installed/$new_version/g" build.gradle.kts
+            echo "  bumped $artifact: $installed -> $new_version (fixes $cve)"
+          done <<< "$bumps"
+
+          echo "no_bumps=false" >> "$GITHUB_OUTPUT"
+          git --no-pager diff --stat build.gradle.kts
+
+      - name: Open PR for bumps
+        if: steps.bump.outputs.no_bumps != 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "deps: Chainguard CVE remediation bumps"
+          title: "deps: Chainguard CVE remediation bumps"
+          body-path: vex-report.md
+          branch: suture/cgr-bumps
+          branch-suffix: timestamp
+          labels: |
+            cgr-bump
+            automated
+            security
+
+      - name: Report (no bumps needed)
+        if: steps.bump.outputs.no_bumps == 'true'
+        run: |
+          echo "No new Chainguard remediations to adopt. Current pins are up to date."

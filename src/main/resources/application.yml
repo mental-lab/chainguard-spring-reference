@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: chainguard-spring-reference
+  security:
+    # DEMO CREDENTIALS — intentionally weak and public. This reference app
+    # needs a login to demonstrate Spring Security working against the +cgr
+    # jars; do not copy this pattern into any real deployment.
+    user:
+      name: demo
+      password: demo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when-authorized

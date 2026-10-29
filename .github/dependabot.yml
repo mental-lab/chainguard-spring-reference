@@ -1,0 +1,54 @@
+version: 2
+
+# Dependabot configuration for Chainguard Libraries.
+#
+# IMPORTANT CAVEAT ABOUT CHAINGUARD VERSION SUFFIXES
+# ---------------------------------------------------
+# Chainguard appends `-0.cgr.N` to the upstream version (e.g. 6.2.19-0.cgr.1).
+# Maven's version comparator treats "0.cgr.1" as a qualifier string and does
+# lexicographic comparison when the qualifier doesn't match known tokens like
+# "SNAPSHOT" or "RC". In practice `-0.cgr.2` is correctly ordered after
+# `-0.cgr.1`, so Dependabot bumps between cgr revisions normally.
+#
+# If you observe Dependabot failing to detect updates for the Chainguard
+# repo, prefer the Renovate config at the repo root (renovate.json) which has
+# explicit versioning scheme control.
+
+registries:
+  chainguard-remediated:
+    type: maven-repository
+    url: https://libraries.cgr.dev/java-remediated/
+    username: ${{secrets.CHAINGUARD_JAVA_IDENTITY_ID}}
+    password: ${{secrets.CHAINGUARD_JAVA_TOKEN}}
+  chainguard-mirror:
+    type: maven-repository
+    url: https://libraries.cgr.dev/java/
+    username: ${{secrets.CHAINGUARD_JAVA_IDENTITY_ID}}
+    password: ${{secrets.CHAINGUARD_JAVA_TOKEN}}
+
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: America/New_York
+    registries:
+      - chainguard-remediated
+      - chainguard-mirror
+    open-pull-requests-limit: 5
+    groups:
+      spring-stack:
+        patterns:
+          - "org.springframework:*"
+          - "org.springframework.boot:*"
+          - "org.springframework.security:*"
+    commit-message:
+      prefix: deps
+      include: scope
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

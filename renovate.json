@@ -1,0 +1,56 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    ":dependencyDashboard"
+  ],
+  "description": "Renovate configuration for Chainguard Libraries. Watches libraries.cgr.dev for new +cgr revisions and opens PRs grouped by Spring family.",
+
+  "hostRules": [
+    {
+      "matchHost": "libraries.cgr.dev",
+      "hostType": "maven",
+      "username": "{{ secrets.CHAINGUARD_JAVA_IDENTITY_ID }}",
+      "password": "{{ secrets.CHAINGUARD_JAVA_TOKEN }}"
+    }
+  ],
+
+  "registryAliases": {
+    "chainguard-remediated": "https://libraries.cgr.dev/java-remediated/",
+    "chainguard-mirror": "https://libraries.cgr.dev/java/"
+  },
+
+  "packageRules": [
+    {
+      "description": "Chainguard uses Maven's qualifier comparison for -0.cgr.N suffixes. Standard loose versioning handles this correctly.",
+      "matchDatasources": ["maven"],
+      "matchPackagePatterns": ["^org\\.springframework"],
+      "versioning": "loose"
+    },
+    {
+      "description": "Group all Spring Framework updates into a single PR",
+      "matchPackagePatterns": [
+        "^org\\.springframework:spring-",
+        "^org\\.springframework\\.boot:",
+        "^org\\.springframework\\.security:"
+      ],
+      "groupName": "spring stack",
+      "schedule": ["before 6am on monday"]
+    },
+    {
+      "description": "Auto-merge Chainguard revision bumps on the same upstream base (e.g. 6.2.19-0.cgr.1 -> 6.2.19-0.cgr.2). CVE fix layered on top of a version your team already approved — safe to flow through CI.",
+      "matchDatasources": ["maven"],
+      "matchUpdateTypes": ["patch"],
+      "matchPackagePatterns": ["^org\\.springframework"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    }
+  ],
+
+  "dependencyDashboard": true,
+  "prConcurrentLimit": 3,
+  "schedule": ["before 6am on monday"],
+  "timezone": "America/New_York"
+}
