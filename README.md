@@ -413,9 +413,16 @@ Chainguard without storing long-lived credentials.
 chainctl iam identities create "spring-reference-ci" \
   --parent <org-uidp> \
   --identity-issuer https://token.actions.githubusercontent.com \
-  --subject "repo:<your-github-user>/chainguard-spring-reference:ref:refs/heads/main" \
+  --subject-pattern "^repo:<your-github-user>(@[0-9]+)?/chainguard-spring-reference(@[0-9]+)?:ref:refs/heads/main$" \
   --role viewer
 ```
+
+**Why `--subject-pattern` instead of `--subject`:** GitHub's workflow
+OIDC `sub` claim now includes stable numeric IDs for the owner and
+repo (e.g. `repo:mental-lab@57370621/chainguard-spring-reference@1439052290:...`).
+The pattern above accepts either the legacy or the immutable format,
+locked to the `main` branch — it doesn't widen the trust surface, it
+just accepts both subject formats GitHub might send.
 
 The command prints the identity UIDP.
 
