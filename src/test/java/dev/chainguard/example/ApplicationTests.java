@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Smoke test: boots the full application context from the Chainguard-provided
- * Spring Framework 6.2.19 / Spring Boot 3.5.14 jars.
+ * Spring Framework 6.2.19 / Spring Boot 3.5.14 / Spring Security 6.5.11 jars.
  *
  * If this test passes, the Chainguard Libraries integration is wired end-to-end:
  * dependency resolution, pull-token auth, BOM-driven transitive versioning, and
