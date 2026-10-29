@@ -1,6 +1,11 @@
 plugins {
     java
-    id("org.springframework.boot") version "3.5.14-0.cgr.1"
+    // Pin the Boot GRADLE PLUGIN at the upstream version (plain 3.5.14).
+    // Gradle plugins are build-time tooling, not runtime libraries, so they
+    // typically don't need Chainguard's +cgr remediation. The actual Boot
+    // runtime JARs get the +cgr suffix via the BOM pin below, which is where
+    // CVE remediation matters.
+    id("org.springframework.boot") version "3.5.14"
     id("io.spring.dependency-management") version "1.1.6"
     // CycloneDX SBOM — consumed by `suture fetch --sbom` to scope the VEX
     // cache to the libraries this project actually ships, and by Grype for
