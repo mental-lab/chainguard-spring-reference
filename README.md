@@ -414,7 +414,7 @@ chainctl iam identities create "spring-reference-ci" \
   --parent <org-uidp> \
   --identity-issuer https://token.actions.githubusercontent.com \
   --subject-pattern "^repo:<your-github-user>(@[0-9]+)?/chainguard-spring-reference(@[0-9]+)?:ref:refs/heads/main$" \
-  --role viewer
+  --role libraries.java.pull_token_creator
 ```
 
 **Why `--subject-pattern` instead of `--subject`:** GitHub's workflow
@@ -423,6 +423,14 @@ repo (e.g. `repo:mental-lab@57370621/chainguard-spring-reference@1439052290:...`
 The pattern above accepts either the legacy or the immutable format,
 locked to the `main` branch — it doesn't widen the trust surface, it
 just accepts both subject formats GitHub might send.
+
+**Why `libraries.java.pull_token_creator` instead of `viewer`:** minting
+a short-lived library pull-token requires `identity.create` capability
+(the mint operation internally spawns a scoped child identity). The
+`viewer` role is read-only and lacks this. `libraries.java.pull_token_creator`
+is the managed Chainguard role that bundles exactly what pull-token
+minting needs — `identity.create`, `libraries.entitlements.list`,
+`libraries.java.list`, and the role-binding plumbing.
 
 The command prints the identity UIDP.
 
