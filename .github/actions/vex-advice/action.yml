@@ -56,8 +56,16 @@ runs:
       shell: bash
       run: |
         mkdir -p results
-        # Scan the fat jar; produces a Grype JSON that suture auto-detects.
-        grype "${{ inputs.jar-glob }}" -o json > results/jar-scan.json
+        # Resolve the fat-jar glob — grype doesn't expand globs itself; it would
+        # treat "build/libs/*.jar" as a container-image reference.
+        # Prefer the Spring Boot executable jar (not the plain -plain.jar).
+        jar_path=$(ls build/libs/*.jar 2>/dev/null | grep -v -- '-plain\.jar$' | head -1)
+        if [ -z "$jar_path" ]; then
+          echo "::error::No jar found matching ${{ inputs.jar-glob }}"
+          exit 1
+        fi
+        echo "Scanning: $jar_path"
+        grype "$jar_path" -o json > results/jar-scan.json
 
     - name: Build VEX fix cache (scoped to project SBOM)
       shell: bash
