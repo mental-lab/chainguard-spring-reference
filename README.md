@@ -447,7 +447,21 @@ gh variable set CHAINGUARD_PARENT \
   --body "<org-uidp>"
 ```
 
-**3. Trigger the first build:**
+**3. Allow Actions to open pull requests.** The nightly VEX sweep opens
+a PR when a new +cgr revision ships that remediates an open CVE.
+GitHub repos default to disallowing this.
+
+```bash
+gh api repos/<your-github-user>/chainguard-spring-reference/actions/permissions/workflow \
+  -X PUT \
+  -F default_workflow_permissions=write \
+  -F can_approve_pull_request_reviews=true
+```
+
+Or via UI: Settings → Actions → General → Workflow permissions → check
+"Allow GitHub Actions to create and approve pull requests" → Save.
+
+**4. Trigger the first build:**
 
 ```bash
 gh workflow run build.yml --repo <your-github-user>/chainguard-spring-reference
