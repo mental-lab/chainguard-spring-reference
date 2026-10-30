@@ -1,0 +1,493 @@
+{
+  "remediation_recommendations": [
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-rmj7-2vxq-3g9f",
+      "severity": "HIGH",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-54513"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.2-0.cgr.1",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.2-0.cgr.1",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-j3rv-43j4-c7qm",
+      "severity": "HIGH",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-54512"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.2-0.cgr.1",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.2-0.cgr.1",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-g3pr-3p32-fp23",
+      "severity": "HIGH",
+      "pkg": "micrometer-core",
+      "installed": "1.15.11",
+      "fixed": "1.15.12",
+      "purl": "pkg:maven/io.micrometer/micrometer-core",
+      "aliases": [
+        "CVE-2026-40984"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/io.micrometer/micrometer-core@1.16.5-0.cgr.2",
+      "fix_purl": "pkg:maven/io.micrometer/micrometer-core@1.16.5-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-f525-44xv-f2qj",
+      "severity": "CRITICAL",
+      "pkg": "tomcat-embed-core",
+      "installed": "10.1.55",
+      "fixed": "10.1.59",
+      "purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core",
+      "aliases": [
+        "CVE-2026-65637"
+      ],
+      "internet_facing": false,
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "No Chainguard backport, but upstream ships a fix — routine dependency hygiene, not gate-blocking."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-9xv2-5v5q-p794",
+      "severity": "CRITICAL",
+      "pkg": "tomcat-embed-core",
+      "installed": "10.1.55",
+      "fixed": "10.1.58",
+      "purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core",
+      "aliases": [
+        "CVE-2026-65905"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.55-0.cgr.2",
+      "fix_purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.55-0.cgr.2",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-gcx9-497g-6cp6",
+      "severity": "CRITICAL",
+      "pkg": "tomcat-embed-core",
+      "installed": "10.1.55",
+      "fixed": "10.1.58",
+      "purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core",
+      "aliases": [
+        "CVE-2026-65182"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.55-0.cgr.2",
+      "fix_purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.55-0.cgr.2",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-w737-wx49-qj23",
+      "severity": "HIGH",
+      "pkg": "micrometer-core",
+      "installed": "1.15.11",
+      "fixed": "1.15.12",
+      "purl": "pkg:maven/io.micrometer/micrometer-core",
+      "aliases": [
+        "CVE-2026-40983"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/io.micrometer/micrometer-core@1.16.5-0.cgr.1",
+      "fix_purl": "pkg:maven/io.micrometer/micrometer-core@1.16.5-0.cgr.1",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-q4xh-88c3-wmh7",
+      "severity": "HIGH",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.6",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-68497"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.2-0.cgr.1",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.2-0.cgr.1",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-p6pp-m3f8-5c89",
+      "severity": "HIGH",
+      "pkg": "jackson-core",
+      "installed": "2.21.2",
+      "fixed": "2.21.7",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core",
+      "aliases": [
+        "CVE-2026-89407"
+      ],
+      "internet_facing": false,
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "No Chainguard backport, but upstream ships a fix — routine dependency hygiene, not gate-blocking."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-h3x4-894j-xpx5",
+      "severity": "CRITICAL",
+      "pkg": "tomcat-embed-core",
+      "installed": "10.1.55",
+      "fixed": "10.1.58",
+      "purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core",
+      "aliases": [
+        "CVE-2026-68525"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.55-0.cgr.2",
+      "fix_purl": "pkg:maven/org.apache.tomcat.embed/tomcat-embed-core@10.1.55-0.cgr.2",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-7hhh-6rmp-j9qf",
+      "severity": "HIGH",
+      "pkg": "jackson-core",
+      "installed": "2.21.2",
+      "fixed": "2.21.7",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core",
+      "aliases": [
+        "CVE-2026-89425"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0-rc1-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0-rc1-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-gx83-3vf8-gh7j",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.6",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-83557"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1-0.cgr.1",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.1-0.cgr.1",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-r7wm-3cxj-wff9",
+      "severity": "HIGH",
+      "pkg": "jackson-core",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core",
+      "aliases": [
+        "CVE-2026-68494"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0-rc1-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-core@2.15.0-rc1-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-cxp5-3px4-pw24",
+      "severity": "HIGH",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.7",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-91777"
+      ],
+      "internet_facing": false,
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "No Chainguard backport, but upstream ships a fix — routine dependency hygiene, not gate-blocking."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-wv8q-qhhj-9h54",
+      "severity": "HIGH",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.7",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-91776"
+      ],
+      "internet_facing": false,
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "No Chainguard backport, but upstream ships a fix — routine dependency hygiene, not gate-blocking."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-qv9r-c865-cp47",
+      "severity": "MEDIUM",
+      "pkg": "log4j-api",
+      "installed": "2.24.3",
+      "fixed": "2.25.5",
+      "purl": "pkg:maven/org.apache.logging.log4j/log4j-api",
+      "aliases": [
+        "CVE-2026-49844"
+      ],
+      "internet_facing": false,
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "No Chainguard backport, but upstream ships a fix — routine dependency hygiene, not gate-blocking."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-wjgm-6hv5-3cvf",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.6",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-19032"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.8-0.cgr.8",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.9.8-0.cgr.8",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-3pjw-73gf-8qr5",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-59888"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.3",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.3",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-9fxm-vc8v-hj55",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-54516"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-5jmj-h7xm-6q6v",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.5",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-54515"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.4-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.4-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-rcqc-6cw3-h962",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-54518"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-5gvw-p9qm-jgwh",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.5",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-59889"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.4-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.4-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-5hh8-q8hv-fr38",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-54517"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-hgj6-7826-r7m5",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.4",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-54514"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.21.3-0.cgr.2",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-vvgp-rfg2-7rr6",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.5",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "aliases": [
+        "CVE-2026-77310"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.19.1-0.cgr.1",
+      "fix_purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind@2.19.1-0.cgr.1",
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "Chainguard-built patched package exists, but only at a different upstream base version. Adopting it is a version change (not a same-version backport); review the API diff and run full regression tests before applying."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-jhq6-gfmj-v8fx",
+      "severity": "LOW",
+      "pkg": "logback-core",
+      "installed": "1.5.32",
+      "fixed": "1.5.34",
+      "purl": "pkg:maven/ch.qos.logback/logback-core",
+      "aliases": [
+        "CVE-2026-10532"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/ch.qos.logback/logback-core@1.5.32-0.cgr.1",
+      "fix_purl": "pkg:maven/ch.qos.logback/logback-core@1.5.32-0.cgr.1",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-p47f-322f-whfh",
+      "severity": "LOW",
+      "pkg": "logback-core",
+      "installed": "1.5.32",
+      "fixed": "1.5.33",
+      "purl": "pkg:maven/ch.qos.logback/logback-core",
+      "aliases": [
+        "CVE-2026-9828"
+      ],
+      "internet_facing": false,
+      "chainguard_fix": "pkg:maven/ch.qos.logback/logback-core@1.5.32-0.cgr.1",
+      "fix_purl": "pkg:maven/ch.qos.logback/logback-core@1.5.32-0.cgr.1",
+      "fix_applied": false,
+      "action": "backport",
+      "rationale": "Chainguard-built patched package exists at the SAME upstream version (VEX status=fixed). This is a same-version backport: identical API surface, CVE fix layered on top. Safe to apply with the existing test suite."
+    },
+    {
+      "target": "build/libs/chainguard-spring-reference-0.1.0-SNAPSHOT.jar",
+      "id": "GHSA-mhm7-754m-9p8w",
+      "severity": "MEDIUM",
+      "pkg": "jackson-databind",
+      "installed": "2.21.2",
+      "fixed": "2.21.5",
+      "purl": "pkg:maven/com.fasterxml.jackson.core/jackson-databind",
+      "internet_facing": false,
+      "fix_applied": false,
+      "action": "upgrade",
+      "rationale": "No Chainguard backport, but upstream ships a fix — routine dependency hygiene, not gate-blocking."
+    }
+  ]
+}
