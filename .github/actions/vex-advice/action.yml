@@ -67,23 +67,15 @@ runs:
         echo "Scanning: $jar_path"
         grype "$jar_path" -o json > results/jar-scan.json
 
-    - name: Build VEX fix cache (scoped to project SBOM)
-      shell: bash
-      env:
-        CHAINGUARD_JAVA_IDENTITY_ID: ${{ env.CHAINGUARD_JAVA_IDENTITY_ID }}
-        CHAINGUARD_JAVA_TOKEN: ${{ env.CHAINGUARD_JAVA_TOKEN }}
-      run: |
-        mkdir -p "$(dirname "${{ inputs.cache-path }}")"
-        suture fetch \
-          --sbom "${{ inputs.sbom-path }}" \
-          --out "${{ inputs.cache-path }}"
-
     - name: Advise (markdown for humans)
       shell: bash
       run: |
+        # suture advise queries the live VEX feed per finding.
+        # --index-prefix=maven is critical — default is "pypi" and would
+        # match zero Java findings.
         suture advise \
           --scan-dir results/ \
-          --cache "${{ inputs.cache-path }}" \
+          --index-prefix maven \
           --format markdown \
           --out "${{ inputs.report-path }}"
 
@@ -92,7 +84,7 @@ runs:
       run: |
         suture advise \
           --scan-dir results/ \
-          --cache "${{ inputs.cache-path }}" \
+          --index-prefix maven \
           --format json \
           --out "${{ inputs.report-path }}.json"
 
@@ -104,6 +96,6 @@ runs:
         # workflow when there's an unapplied fix on a High/Critical finding.
         suture advise \
           --scan-dir results/ \
-          --cache "${{ inputs.cache-path }}" \
+          --index-prefix maven \
           --format markdown \
           --gate
