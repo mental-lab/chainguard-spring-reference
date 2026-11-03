@@ -1,0 +1,17 @@
+# Guardener Hardened Actions configuration
+# https://edu.chainguard.dev/chainguard/guardener/github/actions-security/
+#
+# Enabling this opts the repository into Guardener's two Hardened-Actions
+# modes:
+#   1. Non-blocking PR review comments when a workflow adds a new `uses:`
+#      reference — Guardener suggests the Chainguard hardened equivalent.
+#   2. Scheduled/on-demand migration pull requests when migrate.enabled is
+#      true below (default is recommendations-only).
+
+migrate:
+  # Start in recommendations-only mode so Guardener's output is purely
+  # insight — no auto-opened migration PRs. Flip to true once you've seen
+  # a round of recommendations and want Guardener to open the migration
+  # PR for you (or trigger on demand with
+  # `chainctl guardener github migrate create <owner/repo>`).
+  enabled: false
