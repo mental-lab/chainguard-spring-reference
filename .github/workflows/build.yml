@@ -62,10 +62,10 @@ jobs:
       - name: Dependency report (proves +cgr versions resolved)
         run: ./gradlew --no-daemon dependencies --configuration runtimeClasspath | tee runtime-dependencies.txt
 
-      - name: VEX advice (gate on unapplied Chainguard fixes)
+      - name: VEX advice (report-only during Dependabot isolation test)
         uses: ./.github/actions/vex-advice
         with:
-          gate: "true"
+          gate: "false"
 
       - name: Post advice to PR
         if: github.event_name == 'pull_request'

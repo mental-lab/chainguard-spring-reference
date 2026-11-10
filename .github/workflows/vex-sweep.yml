@@ -8,8 +8,10 @@ name: vex-sweep
 # fixes we haven't adopted yet; the per-PR one gates merges on them.
 
 on:
-  schedule:
-    - cron: "0 6 * * *"     # 06:00 UTC daily
+  # Nightly schedule paused during Dependabot isolation test.
+  # Re-enable by uncommenting the schedule block.
+  # schedule:
+  #   - cron: "0 6 * * *"     # 06:00 UTC daily
   workflow_dispatch:
 
 permissions:
