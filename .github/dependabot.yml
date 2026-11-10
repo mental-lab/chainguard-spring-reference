@@ -15,16 +15,25 @@ version: 2
 # explicit versioning scheme control.
 
 registries:
+  # Remediated catalog: subset of upstream artifacts with -0.cgr.N backports.
+  # replaces-base cuts public Maven Central out of resolution so the comparator
+  # can't drag us to an unremediated upstream version.
   chainguard-remediated:
     type: maven-repository
     url: https://libraries.cgr.dev/java-remediated/
     username: ${{secrets.CHAINGUARD_JAVA_IDENTITY_ID}}
     password: ${{secrets.CHAINGUARD_JAVA_TOKEN}}
+    replaces-base: true
+  # Upstream mirror: proxies everything Maven Central has. Carries resolution
+  # for artifacts the remediated catalog doesn't cover (Gradle plugins, test
+  # libs, cyclonedx, etc.) and for upstream versions that have no -0.cgr.N
+  # backport yet.
   chainguard-mirror:
     type: maven-repository
     url: https://libraries.cgr.dev/java/
     username: ${{secrets.CHAINGUARD_JAVA_IDENTITY_ID}}
     password: ${{secrets.CHAINGUARD_JAVA_TOKEN}}
+    replaces-base: true
 
 updates:
   - package-ecosystem: gradle
