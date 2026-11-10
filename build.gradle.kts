@@ -10,7 +10,7 @@ plugins {
     // CycloneDX SBOM — consumed by `suture fetch --sbom` to scope the VEX
     // cache to the libraries this project actually ships, and by Grype for
     // VEX-aware scanning.
-    id("org.cyclonedx.bom") version "1.10.0"
+    id("org.cyclonedx.bom") version "3.5.1"
 }
 
 group = "dev.chainguard.example"
