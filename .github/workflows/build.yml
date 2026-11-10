@@ -19,7 +19,7 @@ jobs:
     name: Build, test, and advise
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # OIDC federation: no long-lived Chainguard credentials stored in the
       # repo. GitHub's workflow OIDC token is exchanged for a Chainguard
