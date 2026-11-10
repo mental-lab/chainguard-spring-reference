@@ -15,22 +15,15 @@ version: 2
 # explicit versioning scheme control.
 
 registries:
-  # Remediated catalog: subset of upstream artifacts with -0.cgr.N backports.
-  # replaces-base cuts public Maven Central out of resolution so the comparator
-  # can't drag us to an unremediated upstream version.
+  # Only the remediated catalog is wired in. Public Maven Central AND the
+  # Chainguard upstream mirror are both out of scope, so the Maven version
+  # comparator sees exclusively -0.cgr.N versions and correctly bumps
+  # cgr.1 -> cgr.2. Trade-off: any artifact not in the remediated catalog
+  # (Gradle plugins, cyclonedx, test-only libs) will fail to resolve and
+  # Dependabot will skip it. This is the intended scope for the test.
   chainguard-remediated:
     type: maven-repository
     url: https://libraries.cgr.dev/java-remediated/
-    username: ${{secrets.CHAINGUARD_JAVA_IDENTITY_ID}}
-    password: ${{secrets.CHAINGUARD_JAVA_TOKEN}}
-    replaces-base: true
-  # Upstream mirror: proxies everything Maven Central has. Carries resolution
-  # for artifacts the remediated catalog doesn't cover (Gradle plugins, test
-  # libs, cyclonedx, etc.) and for upstream versions that have no -0.cgr.N
-  # backport yet.
-  chainguard-mirror:
-    type: maven-repository
-    url: https://libraries.cgr.dev/java/
     username: ${{secrets.CHAINGUARD_JAVA_IDENTITY_ID}}
     password: ${{secrets.CHAINGUARD_JAVA_TOKEN}}
     replaces-base: true
@@ -45,7 +38,6 @@ updates:
       timezone: America/New_York
     registries:
       - chainguard-remediated
-      - chainguard-mirror
     open-pull-requests-limit: 5
     groups:
       spring-stack:
